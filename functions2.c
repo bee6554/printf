@@ -86,6 +86,7 @@ int print_non_printable(va_list types, char buffer[],
 
 		i++;
 	}
+	
 	buffer[i + offset] = '\0';
 
 	return (write(1, buffer, i + offset));
@@ -166,40 +167,22 @@ int print_rot13string(va_list types, char buffer[],
 		str = "(AHYY)";
 	for (i = 0; str[i]; i++)
 	{
-	for (j = 0; in[j]; j++)
-
-																							{
-
-																											if (in[j] == str[i])
-
-																															{
-
-																																				x = out[j];
-
-																																								write(1, &x, 1);
-
-																																												count++;
-
-																																																break;
-
-																																																			}
-
-																													}
-
-																						if (!in[j])
-
-																									{
-
-																													x = str[i];
-
-																																write(1, &x, 1);
-
-																																			count++;
-
-																																					}
-
-																							}
-
-																return (count);
-
+		for (j = 0; in[j]; j++)
+		{
+			if (in[j] == str[i])
+			{
+				x = out[j];
+				write(1, &x, 1);
+				count++;
+				break;
+			}
+		}
+		if (!in[j])
+		{
+			x = str[i];
+			write(1, &x, 1);
+			count++;
+		}
+	}
+	return (count);
 }
