@@ -86,7 +86,7 @@ int print_non_printable(va_list types, char buffer[],
 
 		i++;
 	}
-	
+
 	buffer[i + offset] = '\0';
 
 	return (write(1, buffer, i + offset));
@@ -140,7 +140,7 @@ int print_reverse(va_list types, char buffer[],
  * print_rot13string - Print a string in rot13.
  * @types: Lista of arguments
  * @buffer: Buffer array to handle print
- *  @flags:  Calculates active flags
+ * @flags:  Calculates active flags
  * @width: get width
  * @precision: Precision specification
  * @size: Size specifier
