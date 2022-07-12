@@ -197,55 +197,164 @@ int main(void)
 }
 Output:
 
-Hello, World! S Identical to the s conversion specifier, except any non-printable characters in the array (ie. characters with an ASCII value < 32 or >= 127) are written as \x followed by the ASCII code value in hexadecimal (upper case, two characters).
+Hello, World!
+
+S
+
+Identical to the s conversion specifier, except any non-printable characters in the array (ie. characters with an ASCII value < 32 or >= 127) are written as \x followed by the ASCII code value in hexadecimal (upper case, two characters).
+
+
 
 Example main.c:
 
+
+
 int main(void)
+
 {
+
     _printf("%S\n", "Hello, World! Π");
+
 }
+
 Output:
 
-Hello, World! \x0FFFFFFFFFFFFFFCE\x0FFFFFFFFFFFFFFA0 r Identical to the s conversion specifier, except characters from the array are written in reverse, starting from, but not including, the terminating null byte (\0) and ending at the first element of the array.
+
+
+Hello, World! \x0FFFFFFFFFFFFFFCE\x0FFFFFFFFFFFFFFA0
+
+:r Identical to the s conversion specifier, except characters from the array are written in reverse, starting from, but not including, the terminating null byte (\0) and ending at the first element of the array.
+
+
 
 Example main.c:
 
+
+
 int main(void)
+
 {
+
     _printf("r\n", "Hello, World");
+
 }
+
 Output:
 
-dlroW ,olleH R Identical to the s conversion specifier, except each character of the array is converted to its corresponding character in ROT13 before being written.
+
+
+dlroW ,olleH
+
+R
+
+Identical to the s conversion specifier, except each character of the array is converted to its corresponding character in ROT13 before being written.
+
 
 
 Example main.c:
 
+
+
 int main(void)
+
 {
+
     _printf("%R\n", "Hello, World");
+
 }
+
 Output:
 
-Uryyb, Jbeyq p The address of the argument is written. The address is written in hexadecimal with a leading 0x.
+
+
+Uryyb, Jbeyq
+
+p
+
+The address of the argument is written. The address is written in hexadecimal with a leading 0x.
+
+
 
 Example main.c:
 
+
+
 int main(void)
+
 {
+
     char *str = "Hello, World";
+
+
+
     _printf("%p\n", (void *)str);
+
+}
+
+Output:
+
+0x561a6d7bab5d
+%
+
+A % is written. No argument is converted. The complete conversion specification is %%.
+Example:
+int main(void)
+
+{
+
+    _printf("%%\n");
+
+}
+
+Output:
+%
+
+More Examples 👍
+
+To print the address of Holberton School in the format "972 Mission St., San Francisco, CA 94103" where street, city and state are pointers to strings:
+
+Example main.c:
+
+#include "main.h"
+
+int main(void)
+
+{
+
+	char *street = "Mission St.", *city = "San Francisco", *state = "CA";
+
+	_printf("%d %s, %s, %s %d\n", 972, street, city, state, 94103);
 }
 Output:
 
-0x561a6d7bab5d % A % is written. No argument is converted. The complete conversion specification is %%.
+972 Mission St., San Francisco, CA 94103
 
-Example:
+To print the result of basic mathematical operations prepended by signs and all numbers printed with a minimum precision of two digits:
+
+Example main.c:
+#include "main.h"
+int main(void)
+{
+	_printf("%.2d + %.2d = %+.2d\n", 1, 2, 1 + 2);
+	_printf("%d - %d = %+d\n", 10, 20, 10 - 20);
+}
+Output:
+
+01 + 02 = +03
+10 - 20 = -10
+To print the values of LONG_MAX and LONG_MIN aligned and left-justified with a width of 30:
+
+Example main.c:
+
+#include "main.h"
+#include <limits.h>
 
 int main(void)
 {
-    _printf("%%\n");
+	_printf("% -30ld -> LONG_MAX\n", LONG_MAX);
+	_printf("%-30ld -> LONG_MIN\n", LONG_MIN);
 }
-Output: 
-%
+Output:
+
+ 9223372036854775807           -> LONG_MAX
+-9223372036854775808           -> LONG_MIN
